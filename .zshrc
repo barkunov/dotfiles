@@ -16,6 +16,39 @@ alias gs='git status'
 alias v='vim'
 alias c='clear'
 
+# git aliases
+alias gst='git status'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gaa='git add .'
+alias gcm='git commit -m'
+alias gp='git push'
+alias gl='git log --oneline --graph --decorate --all'
+alias gpl='git pull --rebase'
+alias grb='git rebase'
+
+
+# Safety aliases
+alias rm='rm -i'          # interactive remove
+alias cp='cp -i'          # interactive copy
+alias mv='mv -i'          # interactive move
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# Directory navigation aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ~='cd ~'
+alias c='clear'
+alias h='history'
+alias ll='ls -lah'        # long listing, human readable
+alias la='ls -A'          # show hidden files
+alias l='ls -CF'          # compact listing
+
+
+
 function rebase_main() {
     # Save current branch
     local branch=$(git symbolic-ref --short HEAD)
