@@ -89,6 +89,8 @@ fi
 ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES_DIR/.p10k.zsh" "$HOME/.p10k.zsh"
 ln -sf "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
+ln -sf "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
+
 
 # Install Vim plugins
 echo "[8/8] Installing Vim plugins..."
