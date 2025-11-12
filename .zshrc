@@ -14,3 +14,41 @@ source $ZSH/oh-my-zsh.sh
 alias ll='ls -lah'
 alias gs='git status'
 alias v='vim'
+alias c='clear'
+
+function rebase_main() {
+    # Save current branch
+    local branch=$(git symbolic-ref --short HEAD)
+
+    # Check for uncommitted changes and stash if needed
+    local stash_needed=false
+    if ! git diff-index --quiet HEAD --; then
+        echo "[INFO] Stashing local changes..."
+        git stash push -u -m "pre-rebase-$branch"
+        stash_needed=true
+    fi
+
+    # Fetch latest main
+    git fetch origin main
+
+    # Update main branch
+    git checkout main || return
+    git pull origin main || return
+
+    # Switch back to original branch
+    git checkout "$branch" || return
+
+    # Rebase onto main
+    git rebase main || {
+        echo "[ERROR] Rebase failed. Resolve conflicts, then run 'git rebase --continue'."
+        return 1
+    }
+
+    # Apply stashed changes if any
+    if $stash_needed; then
+        echo "[INFO] Restoring stashed changes..."
+        git stash pop || echo "[WARN] Failed to apply stashed changes. Check 'git stash list'."
+    fi
+
+    echo "[DONE] $branch successfully rebased onto main."
+}
