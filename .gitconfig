@@ -1,0 +1,24 @@
+[user]
+	name = kirill.barkunov
+	email = kirill.barkunov@epidemicsound.com
+[alias]
+    rebasemain = "!f() { \
+        branch=$(git symbolic-ref --short HEAD); \
+        stash_needed=false; \
+        if ! git diff-index --quiet HEAD --; then \
+            echo '[INFO] Stashing local changes...'; \
+            git stash push -u -m pre-rebase-$branch; \
+            stash_needed=true; \
+        fi; \
+        git fetch origin main; \
+        git checkout main || return; \
+        git pull origin main || return; \
+        git checkout \"$branch\" || return; \
+        git rebase main || { echo '[ERROR] Rebase failed. Resolve conflicts and run git rebase --continue'; return 1; }; \
+        if $stash_needed; then \
+            echo '[INFO] Restoring stashed changes...'; \
+            git stash pop || echo '[WARN] Failed to apply stashed changes. Check git stash list.'; \
+        fi; \
+        echo '[DONE] $branch successfully rebased onto main.'; \
+    }; f"
+
