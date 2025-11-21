@@ -26,6 +26,9 @@ alias gp='git push'
 alias gl='git log --oneline --graph --decorate --all'
 alias gpl='git pull --rebase'
 alias grb='git rebase'
+alias gsw='git switch'
+alias gpl='git pull'
+
 
 
 # Safety aliases
@@ -89,3 +92,15 @@ function rebase_main() {
 # Custom keybindings for beginning/end of line with Cmd + Arrow keys
 bindkey "\e[1;9C" end-of-line
 bindkey "\e[1;9D" beginning-of-line
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/kirill.barkunov/src/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kirill.barkunov/src/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/kirill.barkunov/src/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kirill.barkunov/src/google-cloud-sdk/completion.zsh.inc'; fi
+
+# AsyncAPI CLI Autocomplete
+
+ASYNCAPI_AC_ZSH_SETUP_PATH=/Users/kirill.barkunov/Library/Caches/@asyncapi/cli/autocomplete/zsh_setup && test -f $ASYNCAPI_AC_ZSH_SETUP_PATH && source $ASYNCAPI_AC_ZSH_SETUP_PATH; # asyncapi autocomplete setup
+
+
